@@ -47,19 +47,19 @@ const [mySignedPetitions, setMySignedPetitions] = useState([]);
   }, []);
 
   // --- Fetch Petitions ---
-  useEffect(() => {
-    const fetchPetitions = async () => {
-      try {
-        const data = await getAllPetitions();
-        setPetitions(data);
-      } catch (err) {
-        console.error("Failed to load petitions:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPetitions();
-  }, []);
+  // useEffect(() => {
+  //   const fetchPetitions = async () => {
+  //     try {
+  //       const data = await getAllPetitions();
+  //       setPetitions(data);
+  //     } catch (err) {
+  //       console.error("Failed to load petitions:", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchPetitions();
+  // }, []);
 
   const handleSignout = () => {
     localStorage.clear();

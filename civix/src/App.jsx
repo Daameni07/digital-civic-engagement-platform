@@ -152,7 +152,7 @@ export default function App() {
             }
           >
             <Route index element={<CitizenDashboard />} />
-            <Route
+            {/* <Route
               path="petition"
               element={
                 <PetitionPage
@@ -160,10 +160,10 @@ export default function App() {
                   setPetitions={setPetitions}
                   onSign={handleSignPetition}
                 />
-              }
-            />
+              } */}
+            {/* /> */}
             <Route
-              path="petitions"
+              path="petitions/*"
               element={
                 <PetitionPage
                   petitions={petitions}
