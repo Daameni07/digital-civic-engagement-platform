@@ -61,12 +61,6 @@ const [mySignedPetitions, setMySignedPetitions] = useState([]);
   //   fetchPetitions();
   // }, []);
 
-  const handleSignout = () => {
-    localStorage.clear();
-    navigate("/");
-  };
-
-
 useEffect(() => {
   const fetchData = async () => {
     try {
@@ -90,9 +84,6 @@ useEffect(() => {
   const myPetitions = petitions.filter(p => p.createdBy?._id === userId);
   const mySuccessfulPetitions = petitions.filter(
   (p) => p.status === "Resolved" && p.createdBy?._id === userId);
-  // --- Normalize helper for categories ---
-  const normalize = (str) => (str || "").trim().toLowerCase();
-
   // --- Filter active petitions near user + category ---
   // --- Filter active petitions near user + category ---
 const activePetitions = petitions.filter((p) => {
@@ -194,7 +185,7 @@ const activePetitions = petitions.filter((p) => {
             </button>
           ))}
         </div>
-         {loading || mySignedPetitions.length === 0  ? (
+         {loading ? (
   <Loading />
 ) : activePetitions.length === 0 ? (
   <div className="text-center text-blue-700 py-10">

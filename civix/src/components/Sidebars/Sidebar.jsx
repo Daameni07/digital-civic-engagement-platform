@@ -43,9 +43,9 @@ const Sidebar = () => {
     },
     { to: "/dashboard/citizen/polls", label: "Polls", icon: BarChart2 },
     { to: "/dashboard/citizen/profile", label: "Profile", icon: Users },
-    { to: "/dashboard/citizen/Reports", label: "Reports", icon: ClipboardList },
-    { to: "/dashboard/citizen/Settings", label: "Settings", icon: Settings },
-    { to: "/dashboard/citizen/Help", label: "Help & Support", icon: HelpCircle },
+    { to: "/dashboard/citizen/reports", label: "Reports", icon: ClipboardList },
+    { to: "/dashboard/citizen/settings", label: "Settings", icon: Settings },
+    { to: "/dashboard/citizen/help", label: "Help & Support", icon: HelpCircle },
   ];
 
   return (
@@ -64,7 +64,8 @@ const Sidebar = () => {
 
       {/* Navigation */}
       <nav className="flex-1 p-4 space-y-1">
-        {links.map(({ to, label, icon: Icon }) => {
+        {links.map((link) => {
+          const { to, label } = link;
           const isActive = currentRoute.pathname === to;
 
           return (
@@ -76,7 +77,7 @@ const Sidebar = () => {
                 : "text-gray-700 hover:bg-blue-100"
                 }`}
             >
-              <Icon size={18} className={isActive ? "text-white" : "text-gray-500"} />
+              <link.icon size={18} className={isActive ? "text-white" : "text-gray-500"} />
               {label}
             </Link>
           );
