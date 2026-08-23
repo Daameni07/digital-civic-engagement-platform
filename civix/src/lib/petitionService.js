@@ -53,25 +53,30 @@ export const getPetitionById = async (id) => {
 import axios from "axios";
 import api from "./api";
 
-const API_URL = "http://localhost:4000/api/petition";
+const API_URL = `${import.meta.env.VITE_API_URL}/petition`;
 
 // Fetch all petitions
+// export async function getAllPetitions() {
+//   const token = localStorage.getItem("authToken");
+//   const response = await fetch(API_URL, {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//       ...(token ? { Authorization: `Bearer ${token}` } : {}),
+//     },
+//   });
+//   if (!response.ok) {
+//     const errorText = await response.text();
+//     console.error("Error response from backend:", errorText);
+//     throw new Error("Failed to fetch petitions");
+//   }
+//   return response.json();
+// }
 export async function getAllPetitions() {
-  const token = localStorage.getItem("authToken");
-  const response = await fetch(API_URL, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
-  });
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error("Error response from backend:", errorText);
-    throw new Error("Failed to fetch petitions");
-  }
-  return response.json();
+  const response = await api.get("/petition");
+  return response.data;
 }
+
 
 // Fetch single petition
 export const getPetitionById = async (id) => {
