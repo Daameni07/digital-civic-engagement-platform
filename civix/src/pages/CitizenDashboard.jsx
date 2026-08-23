@@ -29,14 +29,13 @@ const [mySignedPetitions, setMySignedPetitions] = useState([]);
       if (!userId || !token) return;
 
       try {
-        const res = await api.get(`/auth/${userId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUser({
-          name: res.data.name,
-          role: res.data.role,
-          location: res.data.location || "Unknown",
-        });
+  const res = await api.get("/auth/user");
+
+  setUser({
+    name: res.data.name,
+    role: res.data.role,
+    location: res.data.location || "Unknown",
+  });
         localStorage.setItem("name", res.data.name);
         localStorage.setItem("userRole", res.data.role);
         localStorage.setItem("location", res.data.location || "Unknown");
