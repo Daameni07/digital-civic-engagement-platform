@@ -153,7 +153,7 @@ export default function App() {
           >
             <Route index element={<CitizenDashboard />} />
             <Route
-              path="petition/*"
+              path="petition"
               element={
                 <PetitionPage
                   petitions={petitions}
@@ -190,7 +190,7 @@ export default function App() {
             }
           >
             <Route index element={<OfficialDashboard />} />
-            <Route path="petitions/*" element={<OfficialPetitionPage />} />
+            <Route path="petitions" element={<OfficialPetitionPage />} />
             <Route
               path="petitions/pending"
               element={<OfficialActivePetitions addToApproved={addToApproved} />}

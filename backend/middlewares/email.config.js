@@ -3,22 +3,25 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const emailUser = process.env.EMAIL_USER || "daamenig@gmail.com";
-const emailPass = (process.env.EMAIL_PASS || "").replace(/\s+/g, "");
+const emailUser = process.env.EMAIL_USER;
+const emailPass = process.env.EMAIL_PASS?.replace(/\s+/g, "");
 
 export const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
+  port: 465,
+  secure: true,
   auth: {
     user: emailUser,
     pass: emailPass,
-  },
-  tls: {
-    rejectUnauthorized: false,
   },
 });
 
 export const senderAddress = emailUser;
 
-
+transporter.verify((error, success) => {
+  if (error) {
+    console.error("SMTP connection error:", error);
+  } else {
+    console.log("SMTP server is ready");
+  }
+});
