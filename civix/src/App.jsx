@@ -163,6 +163,16 @@ export default function App() {
               }
             />
             <Route
+              path="petitions"
+              element={
+                <PetitionPage
+                  petitions={petitions}
+                  setPetitions={setPetitions}
+                  onSign={handleSignPetition}
+                />
+              }
+            />
+            <Route
               path="create-petition"
               element={<CreatePetition setPetitions={setPetitions} />}
             />
