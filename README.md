@@ -110,10 +110,15 @@ PORT=4000
 
 ### Render OTP email configuration
 
-Set these environment variables in the Render service. `EMAIL_PASS` must be a
-Gmail app password, not the normal Gmail password. The Gmail account must have
-2-Step Verification enabled, and the app password should be entered without
-spaces:
+Use Resend on Render because SMTP connections can time out from hosted services.
+Create an API key at resend.com, verify the sender address/domain, then set:
+
+```text
+RESEND_API_KEY=re_your_api_key
+EMAIL_FROM=verified-sender@your-domain.com
+```
+
+The existing Gmail SMTP fallback is still available for local development:
 
 ```text
 EMAIL_USER=your-gmail-address
