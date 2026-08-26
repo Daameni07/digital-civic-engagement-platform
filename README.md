@@ -108,3 +108,20 @@ MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 PORT=4000
 
+### Render OTP email configuration
+
+Set these environment variables in the Render service. `EMAIL_PASS` must be a
+Gmail app password, not the normal Gmail password. The Gmail account must have
+2-Step Verification enabled, and the app password should be entered without
+spaces:
+
+```text
+EMAIL_USER=your-gmail-address
+EMAIL_PASS=your-16-character-gmail-app-password
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=465
+EMAIL_SECURE=true
+```
+
+After changing Render environment variables, redeploy or restart the service.
+
