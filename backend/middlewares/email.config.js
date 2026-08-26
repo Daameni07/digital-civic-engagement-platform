@@ -6,8 +6,9 @@ dotenv.config();
 const emailUser = process.env.EMAIL_USER;
 const emailPass = process.env.EMAIL_PASS?.replace(/\s+/g, "");
 const emailHost = process.env.EMAIL_HOST || "smtp.gmail.com";
-const emailPort = Number(process.env.EMAIL_PORT || 587);
-const emailSecure = process.env.EMAIL_SECURE === "true";
+const isGmail = emailHost === "smtp.gmail.com";
+const emailPort = isGmail ? 587 : Number(process.env.EMAIL_PORT || 587);
+const emailSecure = isGmail ? false : process.env.EMAIL_SECURE === "true";
 
 if (!emailUser || !emailPass) {
   throw new Error("EMAIL_USER or EMAIL_PASS is missing");
