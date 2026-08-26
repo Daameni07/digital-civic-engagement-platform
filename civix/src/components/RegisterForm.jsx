@@ -36,12 +36,13 @@ export default function RegisterForm({ initialRole = "citizen" })
 
     try {
       setLoading(true);
+      const normalizedEmail = email.trim().toLowerCase();
+      setEmail(normalizedEmail);
 
-      await api.post("/auth/register", { name, email, password, role, location });
+      await api.post("/auth/register", { name, email: normalizedEmail, password, role, location });
+      await api.post("/auth/send-otp", { email: normalizedEmail });
 
       setOtpSent(true);
-
-      await api.post("/auth/send-otp", { email });
       toast.success("OTP sent to your email for verification");
 
     } catch (err) {

@@ -17,7 +17,9 @@ export default function ForgotPassword({ onCancel }) {
     // Send OTP in the background
     try {
       setLoading(true);
-      const response = await api.post("/auth/send-otp", { email });
+      const normalizedEmail = email.trim().toLowerCase();
+      setEmail(normalizedEmail);
+      const response = await api.post("/auth/send-otp", { email: normalizedEmail });
       if(response){
         setOtpSent(true);
         toast.success("✅ OTP sent to your email!");

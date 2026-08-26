@@ -1,7 +1,12 @@
 import axios from "axios";
 
+const apiBaseUrl = (
+  import.meta.env.VITE_API_URL ||
+  "https://digital-civic-engagement-platform.onrender.com/api"
+).replace(/\/$/, "");
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL, // Example: http://localhost:4000/api
+  baseURL: apiBaseUrl,
   withCredentials: true,
 });
 

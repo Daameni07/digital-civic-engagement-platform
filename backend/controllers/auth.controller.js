@@ -106,16 +106,26 @@ export const deleteUser = async (req, res) => {
 
 export const sendOtp = async (req, res) => {
   try {
-    const { email } = req.body;
-    let user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: "User not found" });
+    const email = req.body.email?.trim().toLowerCase();
+    if (!email) return res.status(400).json({ message: "Email is required" });
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "No account exists for this email" });
 
     const otp = generateOtp();
     user.otp = otp;
     user.otpExpires = Date.now() + 5 * 60 * 1000; // 5 min expiry
     await user.save();
 
-    await sendVerficationCode(email, otp);
+    try {
+      await sendVerficationCode(email, otp);
+    } catch (error) {
+      user.otp = undefined;
+      user.otpExpires = undefined;
+      await user.save();
+      console.error("OTP delivery failed:", error.message);
+      return res.status(502).json({ message: "Email delivery is unavailable. Please try again later." });
+    }
 
     res.json({ message: "OTP sent to your email" });
   } catch (err) {
@@ -125,7 +135,8 @@ export const sendOtp = async (req, res) => {
 
 export const verifyOtp = async (req, res) => {
   try {
-    const { email, otp } = req.body;
+    const email = req.body.email?.trim().toLowerCase();
+    const { otp } = req.body;
     const user = await User.findOne({ email });
 
     if (!user || user.otp !== otp || user.otpExpires < Date.now()) {
