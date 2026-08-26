@@ -119,8 +119,8 @@ spaces:
 EMAIL_USER=your-gmail-address
 EMAIL_PASS=your-16-character-gmail-app-password
 EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=465
-EMAIL_SECURE=true
+EMAIL_PORT=587
+EMAIL_SECURE=false
 ```
 
 After changing Render environment variables, redeploy or restart the service.
