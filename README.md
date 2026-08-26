@@ -110,15 +110,7 @@ PORT=4000
 
 ### Render OTP email configuration
 
-Use Resend on Render because SMTP connections can time out from hosted services.
-Create an API key at resend.com, verify the sender address/domain, then set:
-
-```text
-RESEND_API_KEY=re_your_api_key
-EMAIL_FROM=verified-sender@your-domain.com
-```
-
-The existing Gmail SMTP fallback is still available for local development:
+Use Gmail SMTP with a Gmail App Password:
 
 ```text
 EMAIL_USER=your-gmail-address
